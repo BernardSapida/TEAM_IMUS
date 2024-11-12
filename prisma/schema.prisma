@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider              = "zod-prisma"
+  output                = "./zod"
+  relationModel         = true
+  modelCase             = "camelCase"
+  modelSuffix           = "Schema"
+  useDecimalJs          = true
+  prismaJsonNullability = true
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Sex {
+  male
+  female
+}
+
+model Candidate {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  contact_number String
+  address        String
+  sex            Sex
+  age            Int
+  position       String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

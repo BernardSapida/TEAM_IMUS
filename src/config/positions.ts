@@ -1,0 +1,1 @@
+export const positions = ['Kapitan' , 'Kagawad' , 'SK' , 'NGO' , 'Senior' , 'PWD' , 'HOA' , 'SPTA' , 'TODA' , 'Coop' , 'Youth' , 'BHW' , 'Day Care' , 'LGBTQ']
