@@ -2,7 +2,7 @@
 
 import { trpc } from "@/lib/trpc/client";
 import { Divider, Select, SelectItem } from "@nextui-org/react";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Card from "./Card";
 import { positions } from "@/config/positions";
 
@@ -12,8 +12,9 @@ function CandidateLists() {
   const filteredCandidates = candidates?.filter(
     (candidate) => candidate.position === position
   );
-  const handleSelectionChange = (e: any) => {
-    setPosition(e.target.value);
+  const handleSelectionChange = (e: FormEvent<HTMLFormElement>) => {
+    const target = e.target as HTMLFormElement;
+    setPosition(target.value);
   };
 
   return (
