@@ -1,10 +1,10 @@
 "use client";
 
+import { positions } from "@/config/positions";
 import { trpc } from "@/lib/trpc/client";
 import { Divider, Select, SelectItem } from "@nextui-org/react";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Card from "./Card";
-import { positions } from "@/config/positions";
 
 function CandidateLists() {
   const { data: candidates, isLoading } = trpc.candidates.getPersons.useQuery();
