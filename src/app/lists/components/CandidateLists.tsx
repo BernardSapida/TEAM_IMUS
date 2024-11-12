@@ -12,9 +12,8 @@ function CandidateLists() {
   const filteredCandidates = candidates?.filter(
     (candidate) => candidate.position === position
   );
-  const handleSelectionChange = (e: FormEvent<HTMLFormElement>) => {
-    const target = e.target as HTMLFormElement;
-    setPosition(target.value);
+  const handleSelectionChange = (e: any) => {
+    setPosition(e.target.value);
   };
 
   return (
