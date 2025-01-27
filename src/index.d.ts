@@ -1,9 +1,11 @@
-type TPosition = 'Kapitan' | 'Kagawad' | 'SK' | 'NGO' | 'Senior' | 'PWD' | 'HOA' | 'SPTA' | 'TODA' | 'Coop' | 'Youth' | 'BHW' | 'Day Care' | 'LGBTQ'
-type TPerson = {
-    name: string;
-    contact_number: string;
+type TPosition = 'KAPITAN' | 'KAGAWAD' | 'SK KAGAWAD'| 'SK CHAIRMAN' | 'NGO' | 'SENIOR' | 'PWD' | 'HOA' | 'SPTA' | 'TODA' | 'COOP' | 'YOUTH' | 'BHW' | 'DAY CARE' | 'LGBTQ'
+type TCandidate = {
+    id?: string;
+    firstname: string;
+    middlename: string;
+    lastname: string;
+    barangay: string;
     address: string;
-    sex: 'male' | 'female';
-    age: number;
+    contact: string;
     position: TCandidatePosition
 }

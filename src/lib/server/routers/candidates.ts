@@ -1,41 +1,91 @@
+import { positions } from '@/components/config/positions';
 import { db } from '@/lib/db/index';
-import { publicProcedure, router } from "@/lib/server/trpc";
-import { z } from "zod";
+import { publicProcedure, router } from '@/lib/server/trpc';
+import { z } from 'zod';
 
 export const candidatesRouter = router({
-  getPersons: publicProcedure.query(async () => {
-   const candidates = await db.candidate.findMany();
-   return candidates;
-  }),
-  savePerson: publicProcedure.input(
-    z.object({
-      name: z.string().min(1, { message: 'Name is required' }),
-      contact_number: z.string().regex(/^09\d{9}$/, { message: 'Contact number must start with 09 and be 11 digits long' }),
-      address: z.string().min(1, { message: 'Address is required' }),
-      sex: z.enum(
-        ['male', 'female'],
-        {
-           errorMap: () => ({
-              message: 'Gender is required'
-           })
-        }
-     ),
-      age: z.coerce.number().min(1, { message: 'Age is required' }),
-      position: z.enum(
-        ['Kapitan', 'Kagawad', 'SK', 'NGO', 'Senior', 'PWD', 'HOA', 'SPTA', 'TODA', 'Coop', 'Youth', 'BHW', 'Day Care', 'LGBTQ'],
-        {
-           errorMap: () => ({
-              message: 'Candidate position is required'
-           })
-        }
-     )
-    })
- ).mutation(async ({ input }) => {
-   console.log(input)
-   // Insert the candidate to database
-   await db.candidate.create({
-      data: input
-   })
-   return { success: true };
-  })
+   getCandidates: publicProcedure.query(async () => {
+      const candidates = await db.candidate.findMany({});
+      return candidates;
+   }),
+   insertCandidate: publicProcedure
+      .input(
+         z.object({
+            firstname: z.string().min(1, { message: 'Firstname is required' }),
+            middlename: z.string().min(1, { message: 'Middlename is required' }),
+            lastname: z.string().min(1, { message: 'Lastname is required' }),
+            barangay: z.string().min(1, { message: 'Barangay is required' }),
+            address: z.string().min(1, { message: 'Address is required' }),
+            contact: z.string().regex(/^09\d{9}$/, {
+               message: 'Contact number must start with 09 and be 11 digits long'
+            }),
+            position: z.enum(positions as [string, ...string[]], {
+               errorMap: () => ({
+                  message: 'Candidate position is required'
+               })
+            })
+         })
+      )
+      .mutation(async ({ input }) => {
+         console.log(input);
+         // Insert the candidate to database
+         await db.candidate.create({
+            data: input
+         });
+         return { success: true };
+      }),
+   updateCandidate: publicProcedure
+      .input(
+         z.object({
+            id: z.string().min(1, { message: 'Candidate ID is required' }),
+            firstname: z.string().min(1, { message: 'Firstname is required' }),
+            middlename: z.string().min(1, { message: 'Middlename is required' }),
+            lastname: z.string().min(1, { message: 'Lastname is required' }),
+            barangay: z.string().min(1, { message: 'Barangay is required' }),
+            address: z.string().min(1, { message: 'Address is required' }),
+            contact: z.string().regex(/^09\d{9}$/, {
+               message: 'Contact number must start with 09 and be 11 digits long'
+            }),
+            position: z.enum(positions as [string, ...string[]], {
+               errorMap: () => ({
+                  message: 'Candidate position is required'
+               })
+            })
+         })
+      )
+      .mutation(
+         async ({
+            input: { id, firstname, middlename, lastname, barangay, address, contact, position }
+         }) => {
+            // Update the candidate to database
+            const res = await db.candidate.update({
+               where: { id },
+               data: {
+                  firstname,
+                  middlename,
+                  lastname,
+                  barangay,
+                  address,
+                  contact,
+                  position
+               }
+            });
+
+            return res;
+         }
+      ),
+   deleteCandidate: publicProcedure
+      .input(
+         z.object({
+            id: z.string().min(1, { message: 'Candidate ID is required' })
+         })
+      )
+      .mutation(async ({ input: { id } }) => {
+         // Update the candidate to database
+         const res = await db.candidate.delete({
+            where: { id }
+         });
+
+         return res;
+      })
 });

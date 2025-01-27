@@ -1,8 +1,10 @@
-import { candidatesRouter } from "./candidates";
-import { router } from "@/lib/server/trpc";
+import { candidatesRouter } from './candidates';
+import { router } from '@/lib/server/trpc';
+import { usersRouter } from './users';
 
 export const appRouter = router({
-  candidates: candidatesRouter,
+   user: usersRouter,
+   candidates: candidatesRouter
 });
 
 export type AppRouter = typeof appRouter;

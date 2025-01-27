@@ -1,13 +1,13 @@
 import * as z from "zod"
-import { Sex } from "@prisma/client"
 
 export const candidateSchema = z.object({
   id: z.string(),
-  name: z.string(),
-  contact_number: z.string(),
+  firstname: z.string(),
+  middlename: z.string(),
+  lastname: z.string(),
+  barangay: z.string(),
   address: z.string(),
-  sex: z.nativeEnum(Sex),
-  age: z.number().int(),
+  contact: z.string(),
   position: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
