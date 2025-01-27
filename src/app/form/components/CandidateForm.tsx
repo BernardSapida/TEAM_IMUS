@@ -36,7 +36,7 @@ function Page() {
    };
 
    return (
-      <div className="mx-auto w-3/5 rounded-md border-1 shadow-md">
+      <div className="mx-auto w-full max-w-6xl rounded-md border-1 shadow-md">
          <Image
             alt="Team Imus logo"
             src={'/images/banner.png'}
@@ -49,10 +49,10 @@ function Page() {
             <Form
                validationBehavior="native"
                onSubmit={onSubmit}
-               className="space-y-2"
+               className=""
                ref={formRef}
             >
-               <div className="flex w-full gap-2">
+               <div className="flex w-full flex-col gap-2 md:flex-row">
                   <Input
                      type="text"
                      name="firstname"
@@ -84,7 +84,7 @@ function Page() {
                      isRequired
                   />
                </div>
-               <div className="flex w-full gap-2">
+               <div className="flex w-full flex-col gap-2 md:flex-row">
                   <Select
                      name="position"
                      label="Position"
@@ -113,6 +113,7 @@ function Page() {
                         else if (!/^9\d{9}$/.test(value))
                            return 'Contact number must start with 9 and be 10 digits long';
                      }}
+                     maxLength={10}
                      isRequired
                   />
                </div>

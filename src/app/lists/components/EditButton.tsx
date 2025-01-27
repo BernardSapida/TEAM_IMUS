@@ -68,6 +68,7 @@ const EditButton: FunctionComponent<EditButtonProps> = ({
             defaultOpen
             onOpenChange={onOpenChange}
             size="2xl"
+            placement="center"
          >
             <ModalContent>
                {() => (
@@ -78,9 +79,8 @@ const EditButton: FunctionComponent<EditButtonProps> = ({
                         <Form
                            validationBehavior="native"
                            onSubmit={onSubmit}
-                           className="space-y-2"
                         >
-                           <div className="flex w-full gap-2">
+                           <div className="flex w-full flex-col gap-2 md:flex-row">
                               <Input
                                  type="text"
                                  name="firstname"
@@ -115,7 +115,7 @@ const EditButton: FunctionComponent<EditButtonProps> = ({
                                  isRequired
                               />
                            </div>
-                           <div className="flex w-full gap-2">
+                           <div className="flex w-full flex-col gap-2 md:flex-row">
                               <Select
                                  name="position"
                                  label="Position"
@@ -146,6 +146,7 @@ const EditButton: FunctionComponent<EditButtonProps> = ({
                                     else if (!/^9\d{9}$/.test(value))
                                        return 'Contact number must start with 9 and be 10 digits long';
                                  }}
+                                 maxLength={10}
                                  isRequired
                               />
                            </div>

@@ -16,8 +16,8 @@ export const candidatesRouter = router({
             lastname: z.string().min(1, { message: 'Lastname is required' }),
             barangay: z.string().min(1, { message: 'Barangay is required' }),
             address: z.string().min(1, { message: 'Address is required' }),
-            contact: z.string().regex(/^09\d{9}$/, {
-               message: 'Contact number must start with 09 and be 11 digits long'
+            contact: z.string().regex(/^9\d{9}$/, {
+               message: 'Contact number must start with 9 and be 10 digits long'
             }),
             position: z.enum(positions as [string, ...string[]], {
                errorMap: () => ({
@@ -43,8 +43,8 @@ export const candidatesRouter = router({
             lastname: z.string().min(1, { message: 'Lastname is required' }),
             barangay: z.string().min(1, { message: 'Barangay is required' }),
             address: z.string().min(1, { message: 'Address is required' }),
-            contact: z.string().regex(/^09\d{9}$/, {
-               message: 'Contact number must start with 09 and be 11 digits long'
+            contact: z.string().regex(/^9\d{9}$/, {
+               message: 'Contact number must start with 9 and be 10 digits long'
             }),
             position: z.enum(positions as [string, ...string[]], {
                errorMap: () => ({
