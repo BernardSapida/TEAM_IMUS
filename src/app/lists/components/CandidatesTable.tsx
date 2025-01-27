@@ -97,6 +97,13 @@ const CandidatesTableProps: FunctionComponent<CandidatesTableProps> = ({
       return filteredCandidates;
    }, [candidates, filterValue, candidateBarangayFilter, candidatePositionFilter]);
 
+   console.log(filteredItems.length);
+
+   const downloadReport = useCallback(() => {
+      console.log(filteredItems.length);
+      exportToExcel(filteredItems, 'list-report');
+   }, [filteredItems]);
+
    const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
    const items = useMemo(() => {
@@ -168,10 +175,6 @@ const CandidatesTableProps: FunctionComponent<CandidatesTableProps> = ({
       setFilterValue('');
       setPage(1);
    }, []);
-
-   const downloadReport = () => {
-      exportToExcel(filteredItems, 'list-report');
-   };
 
    const topContent = useMemo(() => {
       return (
@@ -251,6 +254,7 @@ const CandidatesTableProps: FunctionComponent<CandidatesTableProps> = ({
       );
    }, [
       filterValue,
+      candidateBarangayFilter,
       candidatePositionFilter,
       onRowsPerPageChange,
       candidates.length,
